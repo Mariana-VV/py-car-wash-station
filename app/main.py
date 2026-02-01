@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 
 class Car:
@@ -46,10 +46,9 @@ class CarWashStation:
                                     / self.count_of_ratings, 1)
 
 
-from decimal import Decimal, ROUND_HALF_UP
-
-def round_half_up(n, decimals=0):
+def round_half_up(number, decimals=0) -> float:
     multiplier = 10 ** decimals
     return float(
-        Decimal(str(n)).quantize(Decimal('1') / multiplier, rounding=ROUND_HALF_UP)
+        Decimal(str(number)).quantize(Decimal('1')
+                                 / multiplier, rounding=ROUND_HALF_UP)
     )
