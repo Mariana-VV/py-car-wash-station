@@ -46,9 +46,9 @@ class CarWashStation:
                                     / self.count_of_ratings, 1)
 
 
-def round_half_up(number, decimals=0) -> float:
+def round_half_up(number: float, decimals: int = 0) -> float:
     multiplier = 10 ** decimals
     return float(
-        Decimal(str(number)).quantize(Decimal('1')
-                                 / multiplier, rounding=ROUND_HALF_UP)
+        Decimal(str(number))
+        .quantize(Decimal("1") / multiplier, rounding=ROUND_HALF_UP)
     )
