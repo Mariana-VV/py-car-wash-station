@@ -1,3 +1,6 @@
+from decimal import Decimal
+
+
 class Car:
     def __init__(self, comfort_class: int, clean_mark: int, brand: str) \
             -> None:
@@ -21,7 +24,7 @@ class CarWashStation:
                 self.clean_power - car.clean_mark) * self.average_rating)
                 / self.distance_from_city_center)
 
-        return round(cost, 1)
+        return round_half_up(cost, 1)
 
     def serve_cars(self, cars: list) -> float:
         income = 0
@@ -30,7 +33,7 @@ class CarWashStation:
                 income += self.calculate_washing_price(car)
                 self.wash_single_car(car)
 
-        return round(round(income, 2), 1)
+        return round_half_up(income, 1)
 
     def wash_single_car(self, car: Car) -> None:
         if self.clean_power > car.clean_mark:
@@ -41,3 +44,12 @@ class CarWashStation:
         self.count_of_ratings += 1
         self.average_rating = round((sum_of_rates + rate)
                                     / self.count_of_ratings, 1)
+
+
+from decimal import Decimal, ROUND_HALF_UP
+
+def round_half_up(n, decimals=0):
+    multiplier = 10 ** decimals
+    return float(
+        Decimal(str(n)).quantize(Decimal('1') / multiplier, rounding=ROUND_HALF_UP)
+    )
