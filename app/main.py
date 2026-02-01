@@ -1,6 +1,3 @@
-from math import ceil, floor
-
-
 class Car:
     def __init__(self, comfort_class: int, clean_mark: int, brand: str) \
             -> None:
@@ -21,8 +18,8 @@ class CarWashStation:
     def calculate_washing_price(self, car: Car) -> float:
 
         cost = ((car.comfort_class * (
-                self.clean_power - car.clean_mark) * self.average_rating) /
-                self.distance_from_city_center)
+                self.clean_power - car.clean_mark) * self.average_rating)
+                / self.distance_from_city_center)
 
         return round(cost, 1)
 
@@ -33,15 +30,13 @@ class CarWashStation:
                 income += self.calculate_washing_price(car)
                 self.wash_single_car(car)
 
-        return round(round(income, 2),1)
+        return round(round(income, 2), 1)
 
     def wash_single_car(self, car: Car) -> None:
         if self.clean_power > car.clean_mark:
             car.clean_mark = self.clean_power
 
-
     def rate_service(self, rate: float) -> None:
-
         sum = self.average_rating * self.count_of_ratings
         self.count_of_ratings += 1
         self.average_rating = round((sum + rate) / self.count_of_ratings, 1)
